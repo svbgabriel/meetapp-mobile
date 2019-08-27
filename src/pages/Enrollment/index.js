@@ -17,6 +17,6 @@ EnrollmentTabBarIcon.propTypes = {
 };
 
 Enrollment.navigationOptions = {
-  tarBarLabel: 'Inscrições',
+  title: 'Inscrições',
   tabBarIcon: EnrollmentTabBarIcon,
 };

@@ -125,6 +125,6 @@ ProfileTabBarIcon.propTypes = {
 };
 
 Profile.navigationOptions = {
-  tarBarLabel: 'Meu perfil',
+  title: 'Meu perfil',
   tabBarIcon: ProfileTabBarIcon,
 };

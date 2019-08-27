@@ -17,6 +17,6 @@ MeetupTabBarIcon.propTypes = {
 };
 
 Meetup.navigationOptions = {
-  tarBarLabel: 'Meetups',
+  title: 'Meetups',
   tabBarIcon: MeetupTabBarIcon,
 };
