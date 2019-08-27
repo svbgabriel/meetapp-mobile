@@ -6,9 +6,9 @@ import {
 
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
-import Dashboard from '~/pages/Dashboard';
-import Profile from '~/pages/Profile';
 import Meetup from '~/pages/Meetup';
+import Profile from '~/pages/Profile';
+import Enrollment from '~/pages/Enrollment';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -17,8 +17,8 @@ export default (isSigned = false) =>
         Sign: createSwitchNavigator({ SignIn, SignUp }),
         App: createBottomTabNavigator(
           {
-            Dashboard,
             Meetup,
+            Enrollment,
             Profile,
           },
           {
@@ -28,7 +28,7 @@ export default (isSigned = false) =>
               activeTintColor: '#ffffff',
               inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
               style: {
-                backgroundColor: '#8d41a8',
+                backgroundColor: '#2B1A2F',
               },
             },
           }
