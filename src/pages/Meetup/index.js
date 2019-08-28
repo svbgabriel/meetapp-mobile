@@ -1,11 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
+import Background from '~/components/Background';
+import Header from '~/components/Header';
 // import { Container } from './styles';
 
 export default function Meetup() {
-  return <View />;
+  return (
+    <Background>
+      <Header />
+    </Background>
+  );
 }
 
 const MeetupTabBarIcon = ({ tintColor }) => (

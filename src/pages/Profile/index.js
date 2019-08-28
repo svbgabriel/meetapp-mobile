@@ -13,6 +13,7 @@ import {
   SubmitButton,
   LogoutButton,
 } from './styles';
+import Header from '~/components/Header';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export default function Profile() {
 
   return (
     <Background>
+      <Header />
       <Container>
         <Form>
           <FormInput
