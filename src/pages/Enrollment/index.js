@@ -1,38 +1,52 @@
 import React, { useState, useEffect } from 'react';
+import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
-import { Container, MeetupList } from './styles';
+import { Container, MeetupList, NotFoundText } from './styles';
 import api from '~/services/api';
 import EnrollData from '~/components/EnrollData';
 
-export default function Enrollment() {
-  const [schedule, setSchedule] = useState([]);
+function Enrollment({ isFocused }) {
+  const [schedules, setSchedules] = useState([]);
+
+  async function loadSchedule() {
+    const response = await api.get('enrollments');
+
+    setSchedules(response.data);
+  }
 
   useEffect(() => {
-    async function loadSchedule() {
-      const response = await api.get('enrollments');
-
-      setSchedule(response.data);
+    if (isFocused) {
+      loadSchedule();
     }
+  }, [isFocused]);
 
-    loadSchedule();
-  }, []);
+  async function handleCancel(id) {
+    await api.delete(`enrollments/${id}`);
 
-  function handleCancel() {}
+    setSchedules(schedules.filter(schedule => schedule.meetup_id !== id));
+  }
 
   return (
     <Background>
       <Header />
       <Container>
-        <MeetupList
-          data={schedule}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <EnrollData onCancel={() => handleCancel()} data={item} />
-          )}
-        />
+        {schedules.length > 0 ? (
+          <MeetupList
+            data={schedules}
+            keyExtractor={item => String(item.id)}
+            renderItem={({ item }) => (
+              <EnrollData
+                onCancel={() => handleCancel(item.meetup_id)}
+                data={item}
+              />
+            )}
+          />
+        ) : (
+          <NotFoundText>Você não se inscreveu em nenhum Meetup</NotFoundText>
+        )}
       </Container>
     </Background>
   );
@@ -50,3 +64,9 @@ Enrollment.navigationOptions = {
   title: 'Inscrições',
   tabBarIcon: EnrollmentTabBarIcon,
 };
+
+Enrollment.propTypes = {
+  isFocused: PropTypes.bool.isRequired,
+};
+
+export default withNavigationFocus(Enrollment);
