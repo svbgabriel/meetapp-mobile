@@ -24,3 +24,8 @@ export const AddDate = styled.TouchableOpacity``;
 export const MeetupList = styled.FlatList`
   padding: 0 20px;
 `;
+
+export const LoadingFooter = styled.View`
+  align-self: center;
+  margin: 0 20px;
+`;
