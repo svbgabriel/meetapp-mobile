@@ -42,10 +42,14 @@ export default function MeetupData({ data, onEnroll }) {
           <Organizer>Organizador: {data.organizer.name}</Organizer>
         </OrganizerContainer>
       </TextContainer>
-      {data.isEnrolled ? (
-        <EnrolledText>Você está inscrito</EnrolledText>
-      ) : (
-        <EnrollButton onPress={onEnroll}>Realizar inscrição</EnrollButton>
+      {!data.past && (
+        <>
+          {data.isEnrolled ? (
+            <EnrolledText>Você está inscrito</EnrolledText>
+          ) : (
+            <EnrollButton onPress={onEnroll}>Realizar inscrição</EnrollButton>
+          )}
+        </>
       )}
     </Container>
   );
@@ -63,6 +67,7 @@ MeetupData.propTypes = {
       url: PropTypes.string,
     }),
     isEnrolled: PropTypes.bool,
+    past: PropTypes.bool,
   }).isRequired,
   onEnroll: PropTypes.func.isRequired,
 };
